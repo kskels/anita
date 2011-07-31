@@ -2,6 +2,8 @@
 # MISSING: can not place element function inside list itself
 # NOT NICE: compiler doesn't allow to write following code
 # it._prev._next = element(value, prev, prev._next);
+# TODO: add some exceptions to improve error handling
+# TODO: sort and find operations would be nice to have
 
 # list element
 var element = fun(value, prev, next) => {
