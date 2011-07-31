@@ -1,17 +1,8 @@
 #!/bin/bash
 
 # compile list library
-../utils/compile list.anita -as-lib -o list.bc -cflags --eh=none -V
+../utils/compile list.anita list.c -as-lib -o list.bc -cflags --eh=none -V
 
-# compile list unittest
-F="list_ut.anita"
-T="t_list_ut.anita"
-
-# rather fancy, this runs gcc pre-processor 
-gcc -x c -w -E -I. -D__FILE__=\"$F\" $F > $T
-
-# compile pre-processed anita code
-../utils/compile "$T" list.c -libs list -V -cflags --eh=none
-
-rm -rf $T
+# compile unittest
+gcc -x c -w -E -I. -D__FILE__=\"list_ut.anita\" list_ut.anita | ../utils/compile - -libs list -V -cflags --eh=none
 
