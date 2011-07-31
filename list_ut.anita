@@ -1,11 +1,52 @@
 
 #include "tunit.anita"
 
-BEGIN_TEST(some_test)
+val default = fun() => {
   var list = LIST.list;
-END_TEST(0)
+  list.append("San Jose");
+  list.append("Los Angeles");
+  list;
+};
+
+BEGIN_TEST(test_default)
+  var list = default();
+  assert_eq(list.size, 2);  
+  assert_not(list.empty);
+  var it = list.begin;
+  assert(it.next);
+  assert_eq(it.value, "San Jose");
+  assert(it.next);
+  assert_eq(it.value, "Los Angeles");
+  assert_not(it.next);
+END_TEST(7)
+
+BEGIN_TEST(test_append)
+  var list = default();
+  list.append("San Francisco");
+  var it = list.end;
+  it.prev;
+  assert_eq(it.value, "San Francisco");
+END_TEST(1)
+
+BEGIN_TEST(test_prepend)
+  var list = default();
+  list.prepend("Sacramento");
+  var it = list.begin;
+  it.next;
+  assert_eq(it.value, "Sacramento");
+END_TEST(1)
+
+BEGIN_TEST(test_clear)
+  var list = default();
+  list.clear;
+  assert_eq(list.size, 0);
+  assert(list.empty);
+END_TEST(2)
 
 val main = fun() => {
-  this.some_test();
+  this.test_default;
+  this.test_append;
+  this.test_prepend;
+  this.test_clear;
 };
 
