@@ -1,0 +1,4 @@
+#!/bin/bash
+../utils/compile list.anita -as-lib -o list.bc -cflags --eh=none
+../utils/compile list_ut.anita list.c -libs list -cflags --eh=none
+

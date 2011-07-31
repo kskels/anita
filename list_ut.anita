@@ -1,0 +1,11 @@
+
+
+val main = fun(app, val firstparam) => {
+  var l = LIST.list;
+  l.append("kaspars");
+  l.append("peter");
+  l.prepend("stokis");
+  var it = l.begin;
+  while (it.next) it.value.puts;
+};
+
