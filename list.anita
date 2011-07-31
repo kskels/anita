@@ -1,0 +1,192 @@
+
+val main = fun(app, val firstparam) => {
+
+  # MISSING: can not place element function inside list itself
+  # UNNICE: compiler don't allow to write, could reduce 
+  # quite some code lines and reduce annoyence among colleagues  
+  # it._prev._next = element(value, prev, prev._next);
+
+  # list element
+  var element = fun(value, prev, next) => {
+    object {
+      var _value = value;
+      var _prev = prev;
+      var _next = next;
+    };
+  };
+  # the list 
+  var list = fun() => {
+    var _list = object {
+      var _first;
+      var _last;
+      var _size;
+      # util
+      var _init = fun() => {
+        this._first = element();
+        this._last = element();
+        var last = this._last;
+        var first = this._first;
+        first._next = last; 
+        last._prev = first;
+        this._size = 0;
+      };
+      # iterators 
+      var _at = fun(pos) => {
+        if (pos < 0) this._first
+        else if (pos == 0) this._first._next
+        else if (pos == this._size-1) this._last._prev
+        else if (pos > this._size) this._last
+        else { 
+          # traverse list for the others
+          var e = this._first;
+          var i = 0;
+          while (i <= pos)  { 
+            e = e._next;
+            i = i + 1;
+          }
+          e;
+        }
+      }; 
+      var it = fun(pos) => {
+        object {
+          var _curr = this._at(pos);
+          var next = fun() => {
+            if (null != this._curr._next._next) {
+              this._curr = this._curr._next;
+              true;
+            } else false;
+          }; 
+          var prev = fun() => {
+            if (null != this._curr._prev._prev) {
+              this._curr = this._curr._prev;
+			  true;
+            } else false;
+          };
+          var value = fun() => this._curr._value; 
+        };
+      }; 
+      var begin = fun() => this.it(-1);
+      var end = fun() => this.it(this._size);
+      # capacity
+      var size = fun() => this._size;
+      var empty = fun() => if (this._size > 0) false else true;
+      # modifiers
+      var insert = fun(it, value) => {
+        var prev = it._curr._prev;
+        prev._next = element(value, prev, prev._next);
+        var curr = it._curr;
+        curr._prev = prev._next;
+        this._size = this._size + 1;  
+      };
+      var append = fun(value) => {
+        this.insert(this.it(this._size), value);
+      };
+      var prepend = fun(value) => {
+        this.insert(this.it(0), value);
+      };
+      var erase = fun(it) => {
+        if (this._size > 1) { 
+          var prev = it._curr._prev;
+          prev._next = prev._next._next;
+          var next = it._curr._next;
+          next._prev = next._prev._prev;
+          this._size = this._size - 1;
+        }
+      }; 
+      var clear = fun() => this._init;
+      # operations
+      var remove = fun(value) => {
+        var it = this.begin;
+        while (it.next) if (it.value == value) this.erase(it);
+      };
+    };
+    _list._init();
+    _list;
+  };
+
+
+  var l = list();
+
+  l.prepend("1");
+  l.prepend("2");
+  l.prepend("3");
+  l.append("44");
+  l.append("44");
+
+  # l.at(3)._value.puts;
+
+  # l.at(l.size)._value.puts;
+
+  # "==================".puts;
+
+  var it = l.begin;
+  while (it.next) it.value.puts;
+
+
+  # l.clear;
+ 
+  # var xx = -4;
+  # var yy = 56 - xx;
+  # yy.to_s.puts;
+
+
+  #  "==================".puts;
+  # it = l.end;
+  # while (it.prev) it.value.puts;
+  # "==================".puts;
+
+
+   "==================".puts;
+
+  # var ll = list();
+  # it = ll.begin;
+  # while (it.next) it.value.puts;
+
+  # "==================".puts;
+  
+  # it = l.end;
+  # while(it.prev) it.value.puts;
+
+  # "======================".puts;
+
+  # it = l.begin;
+  # it.next;
+  # it.value.puts;
+  # it.next;
+  # it.value.puts;
+
+  # it.prev;
+  # it.value.puts;
+  # it.prev;
+  # it.value.puts;
+
+  # "======================".puts;
+
+  # it = l.end;
+  # it.prev;
+  # while (it != l.begin) {
+  #   it.value.puts;
+  #   it.prev;
+  # }
+
+
+  # "======================".puts;
+
+  # l.remove("California");
+  # l.remove("Los Angeles");
+
+  # it = l.begin;
+  # while (it != l.end) {
+  #   it.value.puts;
+  #   it.next;
+  # } 
+
+  # l.clear();
+  # it = l.begin;
+  # while (it != l.end) {
+  #   it.value.puts;
+  #   it.next;
+  # }
+
+}
+
