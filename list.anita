@@ -1,7 +1,6 @@
 
 # MISSING: can not place element function inside list itself
-# UNNICE: compiler don't allow to write, could reduce 
-# quite some code lines and reduce annoyence among colleagues  
+# NOT NICE: compiler doesn't allow to write following code
 # it._prev._next = element(value, prev, prev._next);
 
 # list element
