@@ -1,0 +1,9 @@
+
+val main = fun() => {
+  var i = 0;
+  while (i<100000) {
+    var list = LIST.list;
+    list.append(23);
+    i = i + 1;
+  }
+}

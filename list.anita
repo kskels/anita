@@ -34,7 +34,7 @@ var list = fun() => {
       if (pos < 0) this._first
       else if (pos == 0) this._first._next
       else if (pos == this._size-1) this._last._prev
-      else if (pos > this._size) this._last
+      else if (pos > this._size-1) this._last
       else { 
         # traverse list for the others
         var e = this._first;

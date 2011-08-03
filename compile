@@ -3,6 +3,8 @@
 # compile list library
 ../utils/compile list.anita list.c -as-lib -o list.bc -cflags --eh=none -V
 
-# compile unittest
-gcc -x c -w -E -I. -D__FILE__=\"list_ut.anita\" list_ut.anita | ../utils/compile - -libs list -V -cflags --eh=none
+# unit test
+gcc -x c -w -E -I. -D__FILE__=\"list_ut.anita\" list_ut.anita | ../utils/compile - -libs list -V -cflags --eh=none -o list-ut
 
+# performance test
+gcc -x c -w -E -I. -D__FILE__=\"list_pf.anita\" list_pf.anita | ../utils/compile - -libs list -V -cflags --eh=none -o list-pf
