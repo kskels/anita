@@ -1,9 +1,30 @@
 
-val main = fun() => {
+#include "tunit.anita"
+
+BEGIN_TEST(test_huge_list)
   var i = 0;
-  while (i<100000) {
-    var list = LIST.list;
-    list.append(23);
+  var list = LIST.list;
+  while (i < 100000) {
+    list.append("San Jose");
+    list.append(1024);
+    list.append(true);
     i = i + 1;
-  }
-}
+  };
+END_TEST(0)
+
+BEGIN_TEST(test_many_lists)
+  var i = 0;
+  while (i < 100000) {
+    var list = LIST.list;
+    list.append("San Jose");
+    list.append(1024);
+    list.append(true);
+    i = i + 1;
+  };
+END_TEST(0)
+
+val main = fun() => {
+  this.test_huge_list;
+  this.test_many_lists;
+};
+
