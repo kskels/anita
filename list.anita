@@ -95,10 +95,6 @@ val _base = object {
     var it = this.begin;
     while (it.next) function(it.value);
   };
-  val sort = fun(function) => {
-    "Not implemented!".puts;
-    # do some sorting here
-  };
 };
 # the list 
 var list = fun() => {
