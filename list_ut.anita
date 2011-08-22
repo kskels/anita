@@ -36,6 +36,21 @@ BEGIN_TEST(test_default)
   assert_not(it.next);
 END_TEST(7)
 
+BEGIN_TEST(test_insert)
+  var list = default();
+  var it = list.begin;
+  it.next;
+  it.next;
+  list.insert(it, "Sacramento");
+  it = list.begin;
+  it.next;
+  assert_eq(it.value, "San Jose");
+  it.next;
+  assert_eq(it.value, "Sacramento");
+  it.next;
+  assert_eq(it.value, "Los Angeles");
+END_TEST(3)
+
 BEGIN_TEST(test_append)
   var list = default();
   list.append("San Francisco");
@@ -71,12 +86,35 @@ BEGIN_TEST(test_each)
   assert_not(it.next);
 END_TEST(5) 
 
+BEGIN_TEST(test_erase)
+  var list = default();
+  var it = list.begin;
+  it.next;
+  list.erase(it);
+  it = list.begin;
+  while (it.next) assert_neq(it.value, "San Jose");
+  assert_eq(list.size, 1);
+END_TEST(2)
+
+BEGIN_TEST(test_remove)
+  var list = default();
+  list.append("San Jose");
+  list.prepend("San Jose");
+  list.remove("San Jose");
+  var it = list.begin;
+  while (it.next) assert_neq(it.value, "San Jose");
+  assert_eq(list.size, 1);
+END_TEST(2)
+
 val main = fun() => {
   this.test_init;
   this.test_default;
+  this.test_insert;
   this.test_append;
   this.test_prepend;
   this.test_clear;
   this.test_each;
+  this.test_erase;
+  this.test_remove;
 };
 
