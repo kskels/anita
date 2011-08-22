@@ -1,14 +1,6 @@
 
 #include "tunit.anita"
 
-// peter's stuff
-// 
-// val new_arr = ["hi", 123, "moo"].filter(fun(x) => x == 123);
-// new_arr.to_s.puts;
-// [2, 3, 10, 5, 1].all?(fun(x) => x > 4).to_s.puts;
-// [3].inspect;
-// [].inject(0, fun(x, p) => x + p).to_s.puts;
-
 val default = fun() => {
   var list = LIST.list;
   list.append("San Jose");
@@ -23,6 +15,14 @@ BEGIN_TEST(test_init)
   assert_eq(list.end.value, null);
   assert_eq(list.end.prev, false);
 END_TEST(4)
+
+BEGIN_TEST(test_it)
+  var list = default();
+  var it = list.it(0);
+  assert_eq(it.value, "San Jose");
+  it = list.it(1);
+  assert_eq(it.value, "Los Angeles");
+END_TEST(2)
 
 BEGIN_TEST(test_default)
   var list = default();
@@ -109,6 +109,7 @@ END_TEST(2)
 val main = fun() => {
   this.test_init;
   this.test_default;
+  this.test_it;
   this.test_insert;
   this.test_append;
   this.test_prepend;
