@@ -1,12 +1,28 @@
 
 #include "tunit.anita"
 
+// peter's stuff
+// 
+// val new_arr = ["hi", 123, "moo"].filter(fun(x) => x == 123);
+// new_arr.to_s.puts;
+// [2, 3, 10, 5, 1].all?(fun(x) => x > 4).to_s.puts;
+// [3].inspect;
+// [].inject(0, fun(x, p) => x + p).to_s.puts;
+
 val default = fun() => {
   var list = LIST.list;
   list.append("San Jose");
   list.append("Los Angeles");
   list;
 };
+
+BEGIN_TEST(test_init)
+  var list = LIST.list;
+  assert_eq(list.begin.value, null);
+  assert_eq(list.begin.next, false);
+  assert_eq(list.end.value, null);
+  assert_eq(list.end.prev, false);
+END_TEST(4)
 
 BEGIN_TEST(test_default)
   var list = default();
@@ -43,10 +59,20 @@ BEGIN_TEST(test_clear)
   assert(list.empty);
 END_TEST(2)
 
+BEGIN_TEST(test_each)
+  var list = default();
+  var clone = LIST.list;
+  list.each(fun(value) => clone.append(value));
+  var it = clone.begin;
+  while (it.next) it.value.to_s.puts;
+END_TEST(0) 
+
 val main = fun() => {
+  this.test_init;
   this.test_default;
   this.test_append;
   this.test_prepend;
   this.test_clear;
+  this.test_each;
 };
 
