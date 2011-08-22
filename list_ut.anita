@@ -64,8 +64,12 @@ BEGIN_TEST(test_each)
   var clone = LIST.list;
   list.each(fun(value) => clone.append(value));
   var it = clone.begin;
-  while (it.next) it.value.to_s.puts;
-END_TEST(0) 
+  assert(it.next);
+  assert_eq(it.value, "San Jose");
+  assert(it.next);
+  assert_eq(it.value, "Los Angeles");
+  assert_not(it.next);
+END_TEST(5) 
 
 val main = fun() => {
   this.test_init;

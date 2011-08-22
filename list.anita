@@ -1,8 +1,6 @@
 
-# MISSING: can not place element function inside list itself
 # NOT NICE: compiler doesn't allow to write following code
 # it._prev._next = element(value, prev, prev._next);
-#
 
 # list base
 val _base = object {
@@ -98,6 +96,7 @@ val _base = object {
     while (it.next) function(it.value);
   };
   val sort = fun(function) => {
+    "Not implemented!".puts;
     # do some sorting here
   };
 };
